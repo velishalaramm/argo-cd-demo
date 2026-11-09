@@ -1,5 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
+
 metadata:
   name: devops-deployment
   namespace: car-rental
@@ -18,7 +19,35 @@ spec:
 
     spec:
       containers:
-        - name: devops-container
-          image: velishalaramm/car-rentals:v1
+        - name: nodejs-container
+          image: YOUR_DOCKERHUB_USERNAME/YOUR_IMAGE:latest
+
           ports:
             - containerPort: 3000
+              protocol: TCP
+
+          env:
+            - name: PORT
+              value: "3000"
+
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 20
+            periodSeconds: 20
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
