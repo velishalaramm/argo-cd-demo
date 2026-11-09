@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: nodejs-container
-          image: YOUR_DOCKERHUB_USERNAME/YOUR_IMAGE:latest
+          image: velishalaramm/car-rentals:v1
 
           ports:
             - containerPort: 3000
