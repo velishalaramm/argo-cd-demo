@@ -21,4 +21,4 @@ spec:
         - name: devops-container
           image: velishalaramm/car-rentals:v1
           ports:
-            - containerPort: 80
+            - containerPort: 3000
